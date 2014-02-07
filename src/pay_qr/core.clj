@@ -1,8 +1,4 @@
 (ns pay-qr.core
-  (:import (com.google.zxing MultiFormatWriter
-                             BarcodeFormat
-                             EncodeHintType
-                             client.j2se.MatrixToImageWriter))
   (:use compojure.core)
   (:use pay-qr.qr)
   (:require [compojure.route :as route]
