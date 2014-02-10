@@ -1,0 +1,23 @@
+// Compiled by ClojureScript 0.0-2156
+goog.provide('fields');
+goog.require('cljs.core');
+goog.require('domina.events');
+goog.require('domina.css');
+goog.require('domina');
+goog.require('domina.css');
+goog.require('domina.events');
+goog.require('domina');
+fields.html_for_field = (function html_for_field(num){return [cljs.core.str("          <div class=\"row fields-row\" id=\"fields-"),cljs.core.str(num),cljs.core.str("\">"),cljs.core.str("              <div class=\"col-md-1\">"),cljs.core.str("                  <h5>"),cljs.core.str(num),cljs.core.str(".</h5>"),cljs.core.str("              </div>"),cljs.core.str("              <div class=\"col-md-4\">"),cljs.core.str("                  <input type=\"text\" class=\"form-control field-name\" placeholder=\"Field name\" id=\"field-name-"),cljs.core.str(num),cljs.core.str("\">"),cljs.core.str("              </div>"),cljs.core.str("              <div class=\"col-md-4\">"),cljs.core.str("                  <input type=\"text\" class=\"form-control field-value\" placeholder=\"Field value\" id=\"field-value-"),cljs.core.str(num),cljs.core.str("\">"),cljs.core.str("              </div>"),cljs.core.str("              "),cljs.core.str("              <div class=\"col-md-2\">"),cljs.core.str("                  <button type=\"button\" class=\"btn btn-default btn-md\" id=\"field-remove-"),cljs.core.str(num),cljs.core.str("\">"),cljs.core.str("                     <span class=\"glyphicon glyphicon-trash\"></span> Remove"),cljs.core.str("                  </button>"),cljs.core.str("              </div>"),cljs.core.str("          </div>")].join('');
+});
+fields.last_field_num = cljs.core.atom.call(null,1);
+fields.add_field_BANG_ = (function add_field_BANG_(evt){var num = cljs.core.deref.call(null,fields.last_field_num);var buttons_spacer = domina.by_id.call(null,"buttons-spacer");var html = fields.html_for_field.call(null,num);cljs.core.swap_BANG_.call(null,fields.last_field_num,cljs.core.inc);
+domina.insert_before_BANG_.call(null,buttons_spacer,html);
+return domina.events.listen_BANG_.call(null,domina.by_id.call(null,[cljs.core.str("field-remove-"),cljs.core.str(num)].join('')),new cljs.core.Keyword(null,"click","click",1108654330),(function (){return domina.destroy_BANG_.call(null,domina.by_id.call(null,[cljs.core.str("fields-"),cljs.core.str(num)].join('')));
+}));
+});
+fields.fields_string = (function fields_string(){return clojure.string.join.call(null,";",cljs.core.reduce.call(null,(function (pairs,row){var field_name = domina.value.call(null,domina.css.sel.call(null,row,"div input.field-name"));var field_value = domina.value.call(null,domina.css.sel.call(null,row,"div input.field-value"));console.log([cljs.core.str("name: "),cljs.core.str(field_name)].join(''));
+return cljs.core.conj.call(null,pairs,[cljs.core.str(field_name),cljs.core.str("="),cljs.core.str(field_value)].join(''));
+}),cljs.core.PersistentVector.EMPTY,domina.nodes.call(null,domina.by_class.call(null,"fields-row"))));
+});
+fields.init = (function init(){return domina.events.listen_BANG_.call(null,domina.by_id.call(null,"field-add"),new cljs.core.Keyword(null,"click","click",1108654330),fields.add_field_BANG_);
+});
